@@ -1,4 +1,13 @@
-import React, { useEffect, useRef, useState, useImperativeHandle, createContext, useContext } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
+import { GOOGLE_MAPS_API_KEY } from "../../lib/config";
+import { loadGoogleMaps } from "./googleMapsLoader";
 
 export const MapContext = createContext<any>(null);
 
@@ -97,13 +106,11 @@ const MapView = React.forwardRef(function MapView(
     if ((window as any).google?.maps) {
       initMap();
     } else {
-      const interval = setInterval(() => {
-        if ((window as any).google?.maps) {
-          clearInterval(interval);
-          initMap();
-        }
-      }, 300);
-      return () => clearInterval(interval);
+      loadGoogleMaps(GOOGLE_MAPS_API_KEY)
+        .then(() => initMap())
+        .catch((error) => {
+          console.error("Failed to load Google Maps:", error);
+        });
     }
   }, []);
 

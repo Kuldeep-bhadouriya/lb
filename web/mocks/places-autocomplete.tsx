@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { View, TextInput, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { loadGoogleMaps } from "./googleMapsLoader";
 
 export default function PlacesAutocomplete({
   placeholder,
@@ -33,24 +34,11 @@ export default function PlacesAutocomplete({
     if ((window as any).google?.maps?.places) {
       initService();
     } else {
-      const scriptId = "google-maps-places-script";
-      if (!document.getElementById(scriptId)) {
-        const script = document.createElement("script");
-        script.id = scriptId;
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = () => initService();
-        document.head.appendChild(script);
-      } else {
-        const interval = setInterval(() => {
-          if ((window as any).google?.maps?.places) {
-            clearInterval(interval);
-            initService();
-          }
-        }, 300);
-        return () => clearInterval(interval);
-      }
+      loadGoogleMaps(apiKey, ["places"])
+        .then(() => initService())
+        .catch((error) => {
+          console.error("Failed to load Google Places:", error);
+        });
     }
   }, [apiKey]);
 

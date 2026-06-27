@@ -53,30 +53,49 @@ function WebAppShell({ children }: { children: React.ReactNode }) {
   return (
     <div style={{
       display: "flex",
-      width: "100vw",
-      height: "100vh",
-      backgroundColor: "#070a13",
-      backgroundImage: "radial-gradient(circle at 10% 20%, rgba(45, 106, 79, 0.15) 0%, transparent 40%), radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%)",
-      color: "#f8fafc",
+      width: "100%",
+      minHeight: "100vh",
+      backgroundColor: "#eef8ef",
+      backgroundImage: [
+        "radial-gradient(circle at top left, rgba(126, 213, 143, 0.18), transparent 34%)",
+        "radial-gradient(circle at bottom right, rgba(82, 183, 136, 0.22), transparent 30%)",
+        "linear-gradient(180deg, #f8fcf7 0%, #edf7ee 55%, #e5f3e7 100%)",
+      ].join(", "),
+      color: "#1b4332",
       overflow: "hidden",
-      fontFamily: "'Inter', sans-serif"
+      fontFamily: "'Inter', sans-serif",
+      position: "relative",
     }}>
-      {/* Desktop Info Panel (only visible on screens larger than 860px) */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.22,
+          backgroundImage: [
+            "radial-gradient(circle at 12% 24%, rgba(126, 213, 143, 0.42) 0, rgba(126, 213, 143, 0.42) 10px, transparent 11px)",
+            "radial-gradient(circle at 80% 72%, rgba(69, 123, 89, 0.22) 0, rgba(69, 123, 89, 0.22) 12px, transparent 13px)",
+          ].join(", "),
+          pointerEvents: "none",
+        }}
+      />
+
       <div className="desktop-info-panel" style={{
-        flex: "1 1 50%",
+        flex: "1 1 48%",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         padding: "5% 6% 5% 8%",
         overflowY: "auto",
+        position: "relative",
+        zIndex: 1,
       }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "30px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "28px" }}>
           <div style={{
             width: "48px",
             height: "48px",
             borderRadius: "14px",
-            backgroundColor: "rgba(45, 106, 79, 0.2)",
-            border: "1px solid rgba(82, 183, 136, 0.4)",
+            background: "linear-gradient(135deg, rgba(45,106,79,0.12) 0%, rgba(82,183,136,0.26) 100%)",
+            border: "1px solid rgba(82, 183, 136, 0.35)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -88,20 +107,21 @@ function WebAppShell({ children }: { children: React.ReactNode }) {
             fontFamily: "'Outfit', sans-serif",
             fontSize: "30px",
             fontWeight: "800",
-            letterSpacing: "-0.5px"
+            letterSpacing: "-0.5px",
+            color: "#214d3d",
           }}>
-            Lift<span style={{ color: "#52b788" }}>Buddy</span>
+            Lift<span style={{ color: "#2d6a4f" }}>Buddy</span>
           </span>
           <span style={{
             fontSize: "11px",
             fontWeight: "600",
-            backgroundColor: "rgba(59, 130, 246, 0.15)",
-            color: "#60a5fa",
+            backgroundColor: "rgba(82, 183, 136, 0.14)",
+            color: "#2d6a4f",
             padding: "4px 8px",
             borderRadius: "20px",
-            border: "1px solid rgba(59, 130, 246, 0.3)",
+            border: "1px solid rgba(82, 183, 136, 0.25)",
             marginLeft: "8px"
-          }}>Web Portal v3.0</span>
+          }}>Eco commute</span>
         </div>
 
         <h1 style={{
@@ -110,75 +130,75 @@ function WebAppShell({ children }: { children: React.ReactNode }) {
           fontWeight: "800",
           lineHeight: "1.15",
           marginBottom: "16px",
-          letterSpacing: "-1px"
+          letterSpacing: "-1px",
+          color: "#173b2e",
         }}>
-          Share rides, save money & <span style={{
-            background: "linear-gradient(135deg, #52b788 0%, #3b82f6 100%)",
+          Move around Gwalior with the same calm, clean <span style={{
+            background: "linear-gradient(135deg, #2d6a4f 0%, #52b788 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent"
-          }}>travel smart.</span>
+          }}>LiftBuddy feel.</span>
         </h1>
 
         <p style={{
           fontSize: "16px",
-          color: "#94a3b8",
+          color: "#52796f",
           lineHeight: "1.6",
           marginBottom: "35px",
           maxWidth: "480px"
         }}>
-          LiftBuddy is Gwalior's smart carpooling companion. Connect with students, faculty and riders taking your route. Split travel costs, reduce carbon emissions, and build local networks.
+          The web experience now mirrors the app's leafy eco theme with bright surfaces, rounded cards, and green action states so booking or offering a ride feels consistent across devices.
         </p>
 
-        {/* Feature Cards */}
-        <div style={{ display: "flex", flexDirection: "column", gap: "18px", maxWidth: "480px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "18px", maxWidth: "500px" }}>
           {[
-            { emoji: "⚡", title: "Instant Ride Booking", desc: "Book passenger seats or offer rides on the fly in seconds." },
-            { emoji: "🪙", title: "Credit Reward Points", desc: "Earn and split trip credits instantly converted into actual value." },
-            { emoji: "🛡️", title: "Verified Community", desc: "Special security filters and verifications for students and faculty." }
+            { emoji: "🗺️", title: "Map-first experience", desc: "The web shell now frames the live app like the mobile passenger screen instead of a separate dark portal." },
+            { emoji: "🌿", title: "Eco visual system", desc: "Soft green gradients, white cards, and muted text match the in-app LiftBuddy identity from your screenshot." },
+            { emoji: "🛠️", title: "Broken web fixes", desc: "Google Maps now loads reliably on map screens even before autocomplete mounts, preventing blank web sections." }
           ].map((feat, i) => (
             <div key={i} style={{
               display: "flex",
               gap: "16px",
               padding: "16px 20px",
               borderRadius: "18px",
-              backgroundColor: "rgba(30, 41, 59, 0.4)",
-              border: "1px solid rgba(255,255,255,0.05)",
-              backdropFilter: "blur(8px)",
-              transition: "transform 0.2s ease"
+              backgroundColor: "rgba(255,255,255,0.76)",
+              border: "1px solid rgba(82,183,136,0.14)",
+              backdropFilter: "blur(10px)",
+              boxShadow: "0 18px 40px rgba(45,106,79,0.08)",
             }}>
               <span style={{ fontSize: "22px", marginTop: "2px" }}>{feat.emoji}</span>
               <div>
-                <h3 style={{ fontSize: "14px", fontWeight: "700", marginBottom: "4px", color: "#f1f5f9" }}>{feat.title}</h3>
-                <p style={{ fontSize: "12px", color: "#94a3b8", margin: 0, lineHeight: "1.4" }}>{feat.desc}</p>
+                <h3 style={{ fontSize: "14px", fontWeight: "700", marginBottom: "4px", color: "#173b2e" }}>{feat.title}</h3>
+                <p style={{ fontSize: "12px", color: "#52796f", margin: 0, lineHeight: "1.4" }}>{feat.desc}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Mobile Device Frame Container */}
       <div className="mobile-frame-container" style={{
-        flex: "1 1 50%",
+        flex: "1 1 52%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "20px",
-        zIndex: 5
+        padding: "28px",
+        zIndex: 5,
+        position: "relative",
       }}>
-        {/* Responsive Mobile Phone Mockup */}
         <div className="phone-mockup" style={{
-          width: "410px",
-          height: "830px",
-          borderRadius: "44px",
-          backgroundColor: "#0b0f19",
-          border: "10px solid #1e293b",
-          boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(82, 183, 136, 0.15)",
+          width: "430px",
+          maxWidth: "100%",
+          height: "860px",
+          maxHeight: "calc(100vh - 48px)",
+          borderRadius: "40px",
+          backgroundColor: "#f7fcf8",
+          border: "12px solid rgba(255,255,255,0.75)",
+          boxShadow: "0 28px 65px rgba(28, 60, 45, 0.18), 0 0 0 1px rgba(82,183,136,0.08)",
           overflow: "hidden",
           position: "relative",
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
         }}>
-          {/* Status bar notch */}
           <div style={{
             position: "absolute",
             top: 0,
@@ -186,21 +206,34 @@ function WebAppShell({ children }: { children: React.ReactNode }) {
             transform: "translateX(-50%)",
             width: "140px",
             height: "22px",
-            backgroundColor: "#1e293b",
+            backgroundColor: "rgba(232, 241, 234, 0.95)",
             borderBottomLeftRadius: "16px",
             borderBottomRightRadius: "16px",
             zIndex: 99999,
           }} />
 
-          {/* Actual React App Mounting content */}
           <div style={{ flex: 1, display: "flex", flexDirection: "column", height: "100%", width: "100%", overflow: "hidden" }}>
             {children}
           </div>
         </div>
       </div>
 
-      {/* CSS Styles injection for responsive layouts */}
       <style>{`
+        .phone-mockup {
+          animation: shellFloat 900ms ease-out;
+        }
+
+        @keyframes shellFloat {
+          from {
+            opacity: 0;
+            transform: translateY(24px) scale(0.98);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
         @media (max-width: 860px) {
           .desktop-info-panel {
             display: none !important;
@@ -211,10 +244,15 @@ function WebAppShell({ children }: { children: React.ReactNode }) {
           }
           .phone-mockup {
             width: 100% !important;
-            height: 100% !important;
+            max-width: 100% !important;
+            height: 100vh !important;
+            max-height: 100vh !important;
             border: none !important;
             border-radius: 0 !important;
             box-shadow: none !important;
+          }
+          .phone-mockup::before {
+            display: none !important;
           }
           .phone-mockup > div {
             border-radius: 0 !important;
